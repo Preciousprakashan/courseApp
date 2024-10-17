@@ -1,0 +1,26 @@
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const morgan = require('morgan');
+require('dotenv').config();
+require('./db/connection');
+
+const userRoutes = require('./basicroutes/userRoutes');
+const courseRoutes = require('./basicroutes/courseRoutes');
+
+app.use(morgan('dev'));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Route for user-related requests
+app.use('/user', userRoutes);
+
+// Route for course-related requests
+app.use('/', courseRoutes);
+
+const PORT = 3001;
+
+app.listen(PORT, () => {
+    console.log(`Server running on PORT ${PORT}`);
+});
