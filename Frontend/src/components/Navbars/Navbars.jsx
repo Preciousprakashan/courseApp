@@ -40,6 +40,12 @@ const Navbars = () => {
     };
   }, [location]); // Re-run useEffect when the route changes
 
+
+  let clearUser=()=>{
+    localStorage.removeItem('token');
+    Navigate('/')
+  }
+
   return (
     <Box sx={{ width: '100%' }}>
       <AppBar 
@@ -78,7 +84,7 @@ const Navbars = () => {
             <Button color="inherit" sx={{ color: textColor }}>Add Courses</Button>
           </Link>
           <Link to={'/'}>
-            <Button color="inherit" sx={{ color: textColor }}>Logout</Button>
+            <Button color="inherit" sx={{ color: textColor }} onClick={clearUser}>Logout</Button>
           </Link>
         </Toolbar>
       </AppBar>

@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import './Home.css'; // Ensure the CSS file is imported
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../axiosinterception';
 
 
 function Home() {
@@ -13,7 +14,7 @@ function Home() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3001/').then((res) => {
+        axiosInstance.get('http://localhost:4000').then((res) => {
             setCourse(res.data);
         });
     }, []);
@@ -22,7 +23,7 @@ function Home() {
 
 
     const handleDelete = (id) => {
-        axios.delete('http://localhost:3001/delete/' + id) // Make sure to use DELETE method
+        axiosInstance.delete('http://localhost:4000/delete/' + id) // Make sure to use DELETE method
             .then(() => {
                 // Navigate to a different page (e.g., a confirmation page or back to the home page)
                 navigate('/Home');
@@ -38,7 +39,7 @@ function Home() {
 
     const handleEdit = (id) => {
         // Fetch the course details by _id
-        axios.get('http://localhost:3001/' + id) // Fetch the course data by _id
+        axiosInstance.get('http://localhost:4000/' + id) // Fetch the course data by _id
             .then((response) => {
                 const courseData = response.data; // Get the course data
 

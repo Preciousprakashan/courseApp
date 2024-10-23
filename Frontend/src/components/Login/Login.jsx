@@ -1,37 +1,31 @@
-// src/components/Login/Login.js
-
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../../axiosinterception';
 
 const Login = () => {
-    const [user, setUser] = useState({
-        username: '',
-        password: ''
-    });
+    const [user, setUser] = useState({ username: '', password: '' });
+    const navigate = useNavigate();
 
     const updateUser = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
-    const navigate = useNavigate();
-
     const sentData = async () => {
         try {
-            const response = await axios.post("http://localhost:3001/user", user); // Ensure the URL is correct
-            console.log(response.data);
-            // Handle successful login
+            const response = await axiosInstance.post("http://localhost:4000/user", user);
+            console.log(response.data); // Log the response for debugging
+
             if (response.data.usertoken) {
-                localStorage.setItem("usertoken", response.data.usertoken); // Save token if needed
-                navigate('/Home'); // Navigate to Home on successful login
+                localStorage.setItem("token", response.data.usertoken); // Save the token
                 alert('Welcome ' + user.username);
+                navigate('/Home'); // Navigate to Home on successful login
             }
         } catch (error) {
             console.error('Login failed:', error);
-            alert('Login failed. Please check your credentials.'); // User feedback on failure
+            alert('Login failed. Please check your credentials.');
         }
     };
 

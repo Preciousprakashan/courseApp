@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axiosInstance from '../../axiosinterception';
 
 const Edit = () => {
     const location = useLocation();
@@ -30,7 +31,7 @@ const Edit = () => {
 
     const handleSubmit = () => {
         // Submit the updated course data
-        axios.put(`http://localhost:3001/edit/${course._id}`, course) // Use _id to update
+        axiosInstance.put(`http://localhost:4000/edit/${course._id}`, course) // Use _id to update
             .then(() => {
                 console.log('Course updated successfully');
                 navigate('/Home'); // Navigate back to the home page after success

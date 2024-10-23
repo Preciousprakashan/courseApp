@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../axiosinterception';
 
 const AddCourse = () => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const AddCourse = () => {
 
     const handleSubmit = () => {
         // Submit the new course data
-        axios.post('http://localhost:3001/addCourse', course) // POST to create a new course
+        axiosInstance.post('http://localhost:4000/addCourse', course) // POST to create a new course
             .then(() => {
                 console.log('Course added successfully');
                 navigate('/Home'); // Navigate back to the home page after success

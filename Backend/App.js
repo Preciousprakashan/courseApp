@@ -19,7 +19,7 @@ app.use('/user', userRoutes);
 // Route for course-related requests
 app.use('/', courseRoutes);
 
-const PORT = 3001;
+const PORT = 4000;
 
 app.listen(PORT, () => {
     console.log(`Server running on PORT ${PORT}`);
